@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://kit.fontawesome.com/fe1fd552f1.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="style.css">
+<script type="text/javascript">
+
+
+	function getUsers() {
+		
+		
+		var req = new XMLHttpRequest();
+
+		req.onreadystatechange = function() {
+			var result = document.getElementById('result');
+			if (req.readyState == 4) { // 通信の完了時
+				if (req.status == 200) { // 通信の成功時
+					result.innerHTML = req.responseText;
+				}
+			} else {
+				result.innerHTML = "通信中...";
+			}
+		}
+		req.open('GET', 'http://localhost:8080/groupCreate/Users', true);
+		req.send(null);
+	}
+
+	function postUsers() {
+		var req = new XMLHttpRequest();
+		var sort = document.getElementById('sort').value;
+		var section = document.getElementById('section').value;
+		
+		req.onreadystatechange = function() {
+			var result = document.getElementById('result');
+			if (req.readyState == 4) { // 通信の完了時
+				if (req.status == 200) { // 通信の成功時
+					result.innerHTML = req.responseText;
+				}
+			} else {
+				result.innerHTML = "通信中...";
+			}
+		}
+		req.open('POST', 'http://localhost:8080/groupCreate/search', true);
+		req.setRequestHeader('Content-Type',
+				'application/x-www-form-urlencoded');
+		req.send('sort=' + sort + '&section=' + section);
+	}
+
+
+</script>
+</head>
+<body  link="#006095" vlink="#006095" alink="yellow">
+<div class="hhead">
+<header>
+      <h1 class="heading">
+        <a href="login.html">
+        企業のログイン成功
+        </a>
+      </h1>
+       <div class="social">
+      
+      <i class="fab fa-instagram-square"></i>
+      <a href="https://www.instagram.com/takaharayota/">
+        <i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UC0rOdPYrfo1bjfN2C4BPiWg">
+        <i class="fab fa-youtube"></i></a>
+        <a href="https://twitter.com/opensesametech">
+        <i class="fab fa-twitter"></i></a>
+        
+        </div>
+     
+        
+      
+    </header>
+
+    <!-- navigation -->
+    <nav>
+      <ul class="nav-list">
+        
+        <li class="nav-list-item">
+          <a href="login.html" class="btn btn--purple btn--radius btn--cubic"><i class="fas fa-angle-double-right fa-position-left"></i>HOME<i class="fas fa-angle-double-left fa-position-right"></i></a>
+        </li>
+        
+        <li class="nav-list-item">
+        <a href="https://www.opensesame-tech.com/recruit/information/" class="btn btn--purple btn--radius btn--cubic"><i class="fas fa-angle-double-right fa-position-left"></i>採用情報<i class="fas fa-angle-double-left fa-position-right"></i></a>
+          </li>       
+        <li class="nav-list-item"><a href="https://twitter.com/shinoyan" class="btn btn--purple btn--radius btn--cubic"><i class="fas fa-angle-double-right fa-position-left"></i>憧れのあの人へ<i class="fas fa-angle-double-left fa-position-right"></i></a></li>      </ul>
+        
+    </nav></div>
+
+<div class="gazouu">
+
+    ソートしたい職の選択：
+    <select id = "section">
+		<option value = 0>選択してください</option>
+		<option value = 1>技術者・エンジニア</option>
+		<option value = 2>研究者・探求者</option>
+		<option value = 3>クリエーター・デザイナー</option>
+	</select>
+	並び順：
+	<select id = "sort">
+		<option value = 0>選択してください</option>
+		<option value = 1>昇順</option>
+		<option value = 2>降順</option>
+	</select>
+	<hr>
+	<p>
+		GETボタンを押すとデータベースからユーザーを取得する。
+	</p>
+	<input type = "button" value = "GET" onclick = "getUsers();clearText();" />
+	<hr>
+	<p>
+		ソートボタンを押すと並べ替えたデータを取得する。
+	</p>
+	<input type = "button" value = "ソート" onclick = "postUsers();" />
+
+	<hr>
+	<!-- ↓結果表示 -->
+	<div id = "result"></div>
+	
+	
+	<input type = "button" onclick="location.href='login.html'" value="戻る" >
+	</div>
+</body>
+</html>

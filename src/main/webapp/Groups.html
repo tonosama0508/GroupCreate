@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+	function getEmployee() {
+		var req = new XMLHttpRequest();
+
+		req.onreadystatechange = function() {
+			var result = document.getElementById('result');
+			if (req.readyState == 4) { // 通信の完了時
+				if (req.status == 200) { // 通信の成功時
+					result.innerHTML = req.responseText;
+				}
+			} else {
+				result.innerHTML = "通信中...";
+			}
+		}
+		req.open('GET', 'http://localhost:8080/groupCreate/Groups', true);
+		req.send(null);
+	}
+</script>
+
+
+
+
+<body>
+
+</body>
+</html>
